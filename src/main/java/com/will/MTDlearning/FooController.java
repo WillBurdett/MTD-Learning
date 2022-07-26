@@ -1,10 +1,7 @@
 package com.will.MTDlearning;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +19,10 @@ public class FooController {
     public List<Foo> getAllFoo(){
         return fooService.getAllFoo();
     }
-
+    @GetMapping(path = "/foo/{name}")
+    public Foo getFooByName(@PathVariable String name){
+        return fooService.getFooByName(name.toLowerCase());
+    }
     @PostMapping(path = "/foo")
     public void addFoo(@RequestBody Foo foo){
         fooService.addFoo(foo);

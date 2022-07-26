@@ -22,4 +22,20 @@ public class FooService {
     public void addFoo(Foo foo) {
         fooRepo.addFoo(foo);
     }
+
+    public Foo getFooByName(String name) {
+        if (fooExists(name)){
+            return fooRepo.getFooById(name);
+        }
+        throw new IllegalStateException(name + " not found");
+    }
+
+    public Boolean fooExists(String name){
+        for (Foo f : getAllFoo()){
+            if (name.equals(f.getName().toLowerCase())){
+                return true;
+            }
+        }
+        return false;
+    }
 }

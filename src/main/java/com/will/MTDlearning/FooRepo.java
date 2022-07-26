@@ -17,4 +17,13 @@ public class FooRepo implements FooInterface{
     public void addFoo(Foo foo){
         foos.add(foo);
     }
+
+    public Foo getFooById(String name) {
+        for (Foo f : foos){
+            if (name.equals(f.getName())){
+                return f;
+            }
+        }
+        return null;
+    }
 }
