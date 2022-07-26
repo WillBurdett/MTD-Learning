@@ -1,5 +1,6 @@
 package com.will.MTDlearning;
 
+import com.will.MTDlearning.Exceptions.FooNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +26,10 @@ public class FooService {
 
     public Foo getFooByName(String name) {
         if (fooExists(name)){
-            return fooRepo.getFooById(name);
+            return fooRepo.getFooByName(name);
+        } else {
+            throw new FooNotFoundException(name + " not found");
         }
-        throw new IllegalStateException(name + " not found");
     }
 
     public Boolean fooExists(String name){
