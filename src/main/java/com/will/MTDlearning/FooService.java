@@ -18,4 +18,8 @@ public class FooService {
     public List<Foo> getAllFoo() {
         return fooRepo.getAllFoo();
     }
+
+    public void addFoo(Foo foo) {
+        fooRepo.addFoo(foo);
+    }
 }

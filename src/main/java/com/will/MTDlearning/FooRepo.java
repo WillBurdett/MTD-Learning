@@ -8,9 +8,13 @@ import java.util.List;
 @Repository
 public class FooRepo implements FooInterface{
 
-    List<Foo> foo = new ArrayList<>();
+    List<Foo> foos = new ArrayList<>();
 
     public List<Foo> getAllFoo() {
-        return foo;
+        return foos;
+    }
+
+    public void addFoo(Foo foo){
+        foos.add(foo);
     }
 }

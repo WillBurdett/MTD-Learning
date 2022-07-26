@@ -4,4 +4,6 @@ import java.util.List;
 
 public interface FooInterface {
     public List<Foo> getAllFoo();
+
+    void addFoo(Foo foo);
 }
