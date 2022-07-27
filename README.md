@@ -10,13 +10,9 @@ Getting Started:
 Note: The app is running on port 8080 and mongo-express is running on 8081
 
 Currect endpoints you can test:
-- GET - returns all 'foo'. URL = localhost:8080/foo
-  
-- GET - returns the first 'foo' with a given name. URL = localhost:8080/foo/{name}
-  
-- POST - add your own 'foo' to the collection
-  URL = localhost:8080/foo
-  Request Body =
+- GET - returns all foo
+- GET - returns the first foo with a given name
+- POST - add your own foo to the collection
   
 | URL              | Request Type  | Description                                                             |
 | -------------    | ------------- | ---------------------                                                   |
