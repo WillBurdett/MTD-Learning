@@ -18,10 +18,10 @@ Currect endpoints you can test:
   URL = localhost:8080/foo
   Request Body =
   
-  | URL                | Request Type  | Description                                                             |
-| -------------      | ------------- | ---------------------                                                   |
+| URL              | Request Type  | Description                                                             |
+| -------------    | ------------- | ---------------------                                                   |
 | .../foo          | GET           | Gets all the chefs from the chefs schema                                |
-| .../foo/{name}     | GET           | Gets a specific foo by name                                             |
+| .../foo/{name}   | GET           | Gets a specific foo by name                                             |
 | .../foo          | POST          | Let's you add a foo |
 
 Example foos:
