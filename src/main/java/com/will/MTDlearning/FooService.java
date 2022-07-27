@@ -5,38 +5,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FooService {
 
-    private final FooRepo fooRepo;
+    private final FooRepository fooRepository;
 
     @Autowired
-    public FooService(FooRepo fooRepo) {
-        this.fooRepo = fooRepo;
+    public FooService(FooRepository fooRepository) {
+        this.fooRepository = fooRepository;
     }
 
     public List<Foo> getAllFoo() {
-        return fooRepo.getAllFoo();
+        return fooRepository.findAll();
     }
 
     public void addFoo(Foo foo) {
-        fooRepo.addFoo(foo);
+        fooRepository.insert(foo);
     }
 
-    public Foo getFooByName(String name) {
+    public Optional<Foo> getFooByName(String name) {
         if (fooExists(name)){
-            return fooRepo.getFooByName(name);
+            return fooRepository.findById(name);
         } else {
             throw new FooNotFoundException(name + " not found");
         }
     }
 
     public Boolean fooExists(String name){
-        for (Foo f : getAllFoo()){
-            if (name.equals(f.getName().toLowerCase())){
+            if (fooRepository.existsById(name)){
                 return true;
-            }
         }
         return false;
     }

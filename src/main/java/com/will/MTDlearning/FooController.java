@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class FooController {
@@ -20,7 +21,7 @@ public class FooController {
         return fooService.getAllFoo();
     }
     @GetMapping(path = "/foo/{name}")
-    public Foo getFooByName(@PathVariable String name){
+    public Optional<Foo> getFooByName(@PathVariable String name){
         return fooService.getFooByName(name.toLowerCase());
     }
     @PostMapping(path = "/foo")

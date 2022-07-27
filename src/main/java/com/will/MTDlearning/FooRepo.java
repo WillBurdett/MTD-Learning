@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class FooRepo implements FooInterface{
+public class FooRepo {
 
     List<Foo> foos = new ArrayList<>();
 
