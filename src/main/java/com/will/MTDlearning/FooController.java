@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/foo")
 public class FooController {
 
     private final FooService fooService;
@@ -17,15 +17,15 @@ public class FooController {
         this.fooService = fooService;
     }
 
-    @GetMapping(path = "/foo")
+    @RequestMapping(method = RequestMethod.GET)
     public List<Foo> getAllFoo(){
         return fooService.getAllFoo();
     }
-    @GetMapping(path = "/foo/{name}")
+    @RequestMapping(value = "/{name}", method = RequestMethod.GET)
     public Optional<Foo> getFooByName(@PathVariable String name){
         return fooService.getFooByName(name.toLowerCase());
     }
-    @PostMapping(path = "/foo")
+    @RequestMapping(method = RequestMethod.POST)
     public void addFoo(@RequestBody Foo foo){
         fooService.addFoo(foo);
     }
