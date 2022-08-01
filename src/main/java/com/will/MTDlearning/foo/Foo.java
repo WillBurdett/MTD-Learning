@@ -12,3 +12,5 @@ public class Foo {
     private Integer legs;
     private Boolean canFly;
 }
+
+
