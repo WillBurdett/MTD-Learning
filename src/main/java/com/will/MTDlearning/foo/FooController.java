@@ -1,4 +1,4 @@
-package com.will.MTDlearning;
+package com.will.MTDlearning.foo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

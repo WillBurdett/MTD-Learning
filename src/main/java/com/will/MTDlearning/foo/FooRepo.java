@@ -1,5 +1,6 @@
-package com.will.MTDlearning;
+package com.will.MTDlearning.foo;
 
+import com.will.MTDlearning.foo.Foo;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

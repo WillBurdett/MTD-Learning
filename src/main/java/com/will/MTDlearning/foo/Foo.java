@@ -1,4 +1,4 @@
-package com.will.MTDlearning;
+package com.will.MTDlearning.foo;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

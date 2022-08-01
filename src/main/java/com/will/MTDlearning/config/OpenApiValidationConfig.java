@@ -1,4 +1,4 @@
-package com.will.MTDlearning;
+package com.will.MTDlearning.config;
 
 import com.atlassian.oai.validator.springmvc.OpenApiValidationFilter;
 import com.atlassian.oai.validator.springmvc.OpenApiValidationInterceptor;

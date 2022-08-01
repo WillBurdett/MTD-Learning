@@ -1,6 +1,6 @@
-package com.will.MTDlearning;
+package com.will.MTDlearning.foo;
 
-import com.will.MTDlearning.Exceptions.FooNotFoundException;
+import com.will.MTDlearning.exceptions.FooNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,10 +26,10 @@ public class FooService {
     }
 
     public Optional<Foo> getFooByName(String name) {
-        if (fooExists(name)){
-            return fooRepository.findById(name);
-        } else {
-            throw new FooNotFoundException(name + " not found");
+       if (fooExists(name)) {
+           return fooRepository.findById(name);
+       } else {
+           throw new FooNotFound(name + " not found");
         }
     }
 
