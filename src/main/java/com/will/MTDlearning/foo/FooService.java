@@ -21,22 +21,38 @@ public class FooService {
         return fooRepository.findAll();
     }
 
-    public void addFoo(Foo foo) {
-        fooRepository.insert(foo);
-    }
-
     public Optional<Foo> getFooByName(String name) {
-       if (fooExists(name)) {
+        Optional<Foo> fooWithName = fooRepository.findById(name);
+        if (fooWithName.isPresent()){
            return fooRepository.findById(name);
        } else {
            throw new FooNotFound(name + " not found");
         }
     }
 
-    public Boolean fooExists(String name){
-            if (fooRepository.existsById(name)){
-                return true;
+    public void addFoo(Foo foo) {
+        fooRepository.insert(foo);
+    }
+
+    public void deleteFooByName(String name) {
+        Optional<Foo> fooWithName = fooRepository.findById(name);
+        if (fooWithName.isPresent()){
+            fooRepository.deleteById(name);
+        } else {
+            throw new FooNotFound(name + " not found");
         }
-        return false;
+    }
+
+    public void updateFoo(String name, Foo foo) {
+        Optional<Foo> fooWithName = fooRepository.findById(name);
+        if (fooWithName.isPresent()){
+            Foo updateFoo = fooWithName.get();
+            updateFoo.setName(foo.getName());
+            updateFoo.setLegs(foo.getLegs());
+            updateFoo.setCanFly(foo.getCanFly());
+            fooRepository.save(updateFoo);
+        } else {
+            throw new FooNotFound(name + " not found");
+        }
     }
 }
