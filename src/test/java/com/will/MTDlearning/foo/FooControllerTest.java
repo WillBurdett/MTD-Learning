@@ -10,6 +10,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import com.jayway.jsonpath.spi.json.JacksonJsonProvider;
+
+import com.will.MTDlearning.JsonUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -65,30 +68,45 @@ public class FooControllerTest {
     @MockBean
     private FooService service;
 
-    @MockBean
-    private FooRepository repository;
-
-    @After
-    public void resetDb() {
-        repository.deleteAll();
-    }
-
     @Test
     public void getAllFoo() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/foo")).andExpect(status().isOk());
+
+        Foo bob = new Foo ("bob", 2, false);
+        when(service.getAllFoo()).thenReturn(Arrays.asList(bob));
+
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/foo")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].name", is("bob")))
+                .andExpect(jsonPath("$[0].legs", is(2)))
+                .andExpect(jsonPath("$[0].canFly", is(false)));
     }
 
     @Test
     public void getFooByName() throws Exception {
+
         Foo bob = new Foo ("bob", 2, false);
-        createTestFoo(bob);
         when(service.getFooByName("bob")).thenReturn(Optional.of(bob));
-        mockMvc.perform(get("/foo/bob")).andExpect(status().isOk());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/foo/bob")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.name", is("bob")))
+                .andExpect(jsonPath("$.legs", is(2)))
+                .andExpect(jsonPath("$.canFly", is(false)));
     }
 
     @Test
-    public void addFoo() {
+    public void addFoo() throws Exception {
+        Foo bob = new Foo ("bob", 2, false);
+        mockMvc.perform(post("/foo")
+                .contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(bob)));
 
+        verify(service, times(1)).addFoo(bob);
     }
 
     @Test
@@ -97,9 +115,5 @@ public class FooControllerTest {
 
     @Test
     public void updateFoo() {
-    }
-
-    private void createTestFoo(Foo foo) {
-        repository.save(foo);
     }
 }
