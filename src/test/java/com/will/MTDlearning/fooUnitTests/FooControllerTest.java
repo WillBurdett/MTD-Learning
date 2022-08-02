@@ -50,7 +50,7 @@ public class FooControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].name", is("bob")))
                 .andExpect(jsonPath("$[0].legs", is(2)))
                 .andExpect(jsonPath("$[0].canFly", is(false)));
