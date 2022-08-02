@@ -88,6 +88,10 @@ public class FooControllerTest {
     }
 
     @Test
-    public void updateFoo() {
+    public void updateFoo() throws Exception {
+        Foo bob = new Foo ("bob", 2, false);
+        mockMvc.perform(put("/foo/bob")
+                .contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(bob)));
+        verify(service, times(1)).updateFoo("bob", bob);
     }
 }
