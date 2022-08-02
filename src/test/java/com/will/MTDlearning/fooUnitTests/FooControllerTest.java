@@ -54,10 +54,12 @@ public class FooControllerTest {
                 .andExpect(jsonPath("$[0].name", is("bob")))
                 .andExpect(jsonPath("$[0].legs", is(2)))
                 .andExpect(jsonPath("$[0].canFly", is(false)));
+
+        verify(service, times(1)).getAllFoo();
     }
 
     @Test
-    public void getFooByName() throws Exception {
+    public void getFooByName_WhenFooExists() throws Exception {
 
         Foo bob = new Foo ("bob", 2, false);
         when(service.getFooByName("bob")).thenReturn(Optional.of(bob));
@@ -70,10 +72,12 @@ public class FooControllerTest {
                 .andExpect(jsonPath("$.name", is("bob")))
                 .andExpect(jsonPath("$.legs", is(2)))
                 .andExpect(jsonPath("$.canFly", is(false)));
+
+        verify(service, times(1)).getFooByName("bob");
     }
 
     @Test
-    public void addFoo() throws Exception {
+    public void addFoo_WhenReqBodyOK() throws Exception {
         Foo bob = new Foo ("bob", 2, false);
         mockMvc.perform(post("/foo")
                 .contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(bob)));
@@ -88,7 +92,7 @@ public class FooControllerTest {
     }
 
     @Test
-    public void updateFoo() throws Exception {
+    public void updateFoo_WhenFooExistsAndReqBodyOK() throws Exception {
         Foo bob = new Foo ("bob", 2, false);
         mockMvc.perform(put("/foo/bob")
                 .contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(bob)));
